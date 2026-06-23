@@ -1,0 +1,47 @@
+{
+  "name": "ig-easy-auto",
+  "version": "1.0.0",
+  "description": "Premium automotive dealership website - IG Easy Auto Limited",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "type-check": "tsc --noEmit"
+  },
+  "dependencies": {
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "next": "^14.2.0",
+    "@supabase/supabase-js": "^2.43.0",
+    "zod": "^3.23.0",
+    "tailwindcss": "^3.4.1",
+    "autoprefixer": "^10.4.18",
+    "postcss": "^8.4.33",
+    "lucide-react": "^0.376.0",
+    "clsx": "^2.1.0",
+    "next-image-export-optimizer": "^2.3.4",
+    "react-hook-form": "^7.51.0",
+    "axios": "^1.6.7",
+    "js-cookie": "^3.0.5",
+    "embla-carousel-react": "^8.0.0-rc19",
+    "embla-carousel-autoplay": "^8.0.0-rc19"
+  },
+  "devDependencies": {
+    "typescript": "^5.3.3",
+    "@types/node": "^20.11.0",
+    "@types/react": "^18.2.46",
+    "@types/react-dom": "^18.2.18",
+    "@typescript-eslint/eslint-plugin": "^6.18.0",
+    "@typescript-eslint/parser": "^6.18.0",
+    "eslint": "^8.56.0",
+    "eslint-config-next": "^14.2.0",
+    "eslint-config-prettier": "^9.1.0",
+    "prettier": "^3.1.1",
+    "@tailwindcss/forms": "^0.5.7"
+  },
+  "engines": {
+    "node": ">=18.17"
+  }
+}
