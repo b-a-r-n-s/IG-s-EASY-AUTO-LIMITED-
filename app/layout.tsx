@@ -57,16 +57,7 @@ export const metadata: Metadata = {
     description: SEO_DEFAULTS.description,
     images: ['/twitter-image.png'],
   },
-  appLinks: {
-    ios: {
-      app_store_id: 'id123456789',
-      app_name: COMPANY.name,
-    },
-    android: {
-      package: 'com.igeasyauto.app',
-      app_name: COMPANY.name,
-    },
-  },
+  
   verification: {
     google: 'your-google-site-verification-code',
   },
