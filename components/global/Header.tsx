@@ -127,3 +127,14 @@ export default function Header() {
                 </Button>
                 <Link href="/contact" className="flex-1" onClick={closeMobileMenu}>
                   <Button variant="primary" size="sm" fullWidth>
+                    Contact
+                  </Button>
+                </Link>
+              </div>
+            </div>
+          </nav>
+        )}
+      </div>
+    </header>
+  )
+                            }
