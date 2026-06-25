@@ -151,3 +151,54 @@ export default function RootLayout({ children }: RootLayoutProps) {
                   dayOfWeek: [
                     'Monday',
                     'Tuesday',
+                    'Wednesday',
+                    'Thursday',
+                    'Friday',
+                    'Saturday',
+                  ],
+                  opens: '08:00',
+                  closes: '18:00',
+                },
+                {
+                  '@type': 'OpeningHoursSpecification',
+                  dayOfWeek: 'Sunday',
+                  opens: '10:00',
+                  closes: '18:00',
+                },
+              ],
+              priceRange: '₦2,000,000 - ₦50,000,000',
+              aggregateRating: {
+                '@type': 'AggregateRating',
+                ratingValue: '4.9',
+                ratingCount: '150',
+              },
+            }),
+          }}
+        />
+
+        {/* Preload critical resources */}
+        <link rel="preload" href="/fonts/space-grotesk.woff2" as="font" type="font/woff2" crossOrigin="anonymous" />
+        <link rel="preload" href="/fonts/ibm-plex-sans.woff2" as="font" type="font/woff2" crossOrigin="anonymous" />
+
+        {/* DNS Prefetch */}
+        <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
+        <link rel="dns-prefetch" href="https://fonts.gstatic.com" />
+      </head>
+
+      <body className="bg-black text-white">
+        {/* Skip to main content link */}
+        <a
+          href="#main-content"
+          className="sr-only focus:not-sr-only focus:absolute focus:top-0 focus:left-0 focus:z-50 focus:p-4 focus:bg-gold focus:text-black"
+        >
+          Skip to main content
+        </a>
+
+        {/* Main content */}
+        <main id="main-content" className="min-h-screen">
+          {children}
+        </main>
+      </body>
+    </html>
+  )
+    }
