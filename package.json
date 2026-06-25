@@ -21,7 +21,6 @@
     "postcss": "^8.4.33",
     "lucide-react": "^0.376.0",
     "clsx": "^2.1.0",
-    "next-image-export-optimizer": "^2.3.4",
     "react-hook-form": "^7.51.0",
     "axios": "^1.6.7",
     "js-cookie": "^3.0.5",
