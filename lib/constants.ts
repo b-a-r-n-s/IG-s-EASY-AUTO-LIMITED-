@@ -65,3 +65,128 @@ export const FOOTER_LINKS = {
   ],
   services: [
     { name: 'Buy a Car', href: '/inventory' },
+    { name: 'Procurement', href: '/procurement' },
+    { name: 'Sell Your Car', href: '/sell-your-car' },
+  ],
+  connect: [
+    { name: 'WhatsApp', href: WHATSAPP.url },
+    { name: `Call: ${COMPANY.phone1}`, href: `tel:${COMPANY.phone1}` },
+    { name: `Email: ${COMPANY.email}`, href: `mailto:${COMPANY.email}` },
+  ],
+}
+
+// Procurement Service Details
+export const PROCUREMENT_SERVICE = {
+  title: 'Vehicle Procurement Service',
+  description: 'We find and deliver your dream car',
+  timeline: '1 week typical, 2 weeks maximum',
+  successRate: '91.56%',
+  features: [
+    'Professional sourcing of quality vehicles',
+    'Competitive pricing and best deals',
+    'Complete documentation handling',
+    'Delivery to your location',
+    'Post-purchase support',
+  ],
+}
+
+// Sell Your Car Service Details
+export const SELL_SERVICE = {
+  title: 'Sell Your Car',
+  description: 'Quick and hassle-free car selling',
+  features: [
+    'Fair market valuation',
+    'Quick approval process',
+    'Instant payment options',
+    'No hidden charges',
+    'Professional inspection',
+  ],
+}
+
+// Why Choose Us
+export const WHY_CHOOSE_US = [
+  {
+    icon: 'shield',
+    title: 'Trusted Partner',
+    description: 'Over 91.56% success rate in vehicle procurement',
+  },
+  {
+    icon: 'zap',
+    title: 'Fast Service',
+    description: 'Procurement completed in 1-2 weeks',
+  },
+  {
+    icon: 'award',
+    title: 'Premium Quality',
+    description: 'Only quality vehicles and genuine transactions',
+  },
+  {
+    icon: 'heart',
+    title: 'Customer Satisfaction',
+    description: 'Quality and satisfaction in every transaction',
+  },
+]
+
+// Vehicle Filters
+export const VEHICLE_FILTERS = {
+  makes: ['Toyota', 'BMW', 'Mercedes-Benz', 'Audi', 'Lexus', 'Honda', 'Ford', 'Chevrolet', 'Volkswagen', 'Hyundai', 'Kia', 'Mazda'],
+  transmissions: ['Manual', 'Automatic', 'CVT'],
+  fuelTypes: ['Petrol', 'Diesel', 'Hybrid', 'Electric'],
+  bodyTypes: ['Sedan', 'SUV', 'Hatchback', 'Coupe', 'Truck', 'Van', 'Wagon'],
+  conditions: ['New', 'Excellent', 'Good', 'Fair'],
+  priceRanges: [
+    { label: 'All Prices', min: 0, max: Infinity },
+    { label: 'Under ₦2,000,000', min: 0, max: 2000000 },
+    { label: '₦2M - ₦5M', min: 2000000, max: 5000000 },
+    { label: '₦5M - ₦10M', min: 5000000, max: 10000000 },
+    { label: '₦10M - ₦20M', min: 10000000, max: 20000000 },
+    { label: 'Over ₦20M', min: 20000000, max: Infinity },
+  ],
+}
+
+// Pagination
+export const PAGINATION = {
+  vehiclesPerPage: 12,
+  testimonialsPerPage: 6,
+}
+
+// SEO Defaults
+export const SEO_DEFAULTS = {
+  siteName: 'IG Easy Auto Limited',
+  description: 'Premium vehicle sales and procurement services. Luxury, reliability, and trust in every transaction.',
+  keywords: 'vehicle sales, car procurement, buy car, sell car, automobile dealer, luxury cars, Nigeria',
+  author: 'IG Easy Auto Limited',
+  image: '/og-image.png',
+}
+
+// API Response Messages
+export const MESSAGES = {
+  success: 'Operation completed successfully',
+  error: 'An error occurred. Please try again.',
+  loading: 'Loading...',
+  noResults: 'No results found',
+  required: 'This field is required',
+  invalidEmail: 'Please enter a valid email address',
+  invalidPhone: 'Please enter a valid phone number',
+  inquiry: {
+    success: 'Your inquiry has been sent. We will contact you soon.',
+    error: 'Failed to send inquiry. Please try again.',
+  },
+  procurement: {
+    success: 'Your procurement request has been received. We will contact you within 24 hours.',
+    error: 'Failed to submit procurement request. Please try again.',
+  },
+  sellCar: {
+    success: 'Your car listing has been submitted. We will review and contact you soon.',
+    error: 'Failed to submit car listing. Please try again.',
+  },
+}
+
+// Admin Dashboard
+export const ADMIN = {
+  defaultPageSize: 20,
+  sessionTimeout: 24 * 60 * 60 * 1000, // 24 hours in milliseconds
+}
+
+// Analytics
+export const GA4_ID = process.env.NEXT_PUBLIC_GA4_TRACKING_ID || ''
