@@ -8,32 +8,13 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        primary: {
-          black: '#000000',
-          gold: '#D4AF37',
-          'dark-gold': '#B8860B',
-          silver: '#C0C0C0',
-          white: '#FFFFFF',
-          'light-gray': '#F5F5F5',
-          'dark-gray': '#1A1A1A',
-        },
-      },
-      backgroundColor: {
-        primary: '#000000',
-        secondary: '#D4AF37',
-        tertiary: '#C0C0C0',
-        accent: '#1A1A1A',
-      },
-      textColor: {
-        primary: '#FFFFFF',
-        secondary: '#D4AF37',
-        muted: '#C0C0C0',
-        dark: '#000000',
-      },
-      borderColor: {
-        primary: '#D4AF37',
-        secondary: '#C0C0C0',
-        light: '#F5F5F5',
+        'primary-black': '#000000',
+        'primary-gold': '#D4AF37',
+        'primary-dark-gold': '#B8860B',
+        'primary-silver': '#C0C0C0',
+        'primary-white': '#FFFFFF',
+        'primary-light-gray': '#F5F5F5',
+        'primary-dark-gray': '#1A1A1A',
       },
       fontFamily: {
         heading: ['Space Grotesk', 'sans-serif'],
