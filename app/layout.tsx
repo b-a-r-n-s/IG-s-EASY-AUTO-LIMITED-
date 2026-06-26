@@ -57,7 +57,6 @@ export const metadata: Metadata = {
     description: SEO_DEFAULTS.description,
     images: ['/twitter-image.png'],
   },
-  
   verification: {
     google: 'your-google-site-verification-code',
   },
