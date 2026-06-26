@@ -114,7 +114,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
           </>
         )}
 
-        {/* Schema Markup - Organization */}
+        {/* Schema Markup  - Organization */}
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
@@ -192,3 +192,4 @@ export default function RootLayout({ children }: RootLayoutProps) {
     </html>
   )
     }
+ 
