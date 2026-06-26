@@ -50,7 +50,7 @@ const Carousel = React.forwardRef<HTMLDivElement, CarouselProps>(
       onSelect()
     }, [emblaApi, onSelect])
 
-    // Scroll to slide
+    // Scroll to slide...
     const scrollTo = useCallback(
       (index: number) => emblaApi && emblaApi.scrollTo(index),
       [emblaApi]
