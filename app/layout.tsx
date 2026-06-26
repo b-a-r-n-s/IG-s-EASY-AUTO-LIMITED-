@@ -18,11 +18,11 @@ export const metadata: Metadata = {
     telephone: false,
     address: false,
   },
-  viewport: {
+  /*viewport: {
     width: 'device-width',
     initialScale: 1,
     maximumScale: 5,
-  },
+  },*/
   robots: {
     index: true,
     follow: true,
