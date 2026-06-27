@@ -8,6 +8,7 @@ import Button from '@/components/ui/Button'
 import Input, { Textarea, Select } from '@/components/ui/Input'
 import Card from '@/components/ui/Card'
 import { SELL_SERVICE, WHATSAPP, VEHICLE_FILTERS } from '@/lib/constants'
+import { supabase } from '@/lib/supabase'
 
 export default function SellYourCarPage() {
   const [formData, setFormData] = useState({
@@ -24,6 +25,7 @@ export default function SellYourCarPage() {
   })
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [submitSuccess, setSubmitSuccess] = useState(false)
+  const [submitError, setSubmitError] = useState('')
   const [errors, setErrors] = useState<Record<string, string>>({})
 
   const conditionOptions = VEHICLE_FILTERS.conditions.map((c) => ({ value: c, label: c }))
@@ -53,28 +55,47 @@ export default function SellYourCarPage() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
+    setSubmitError('')
 
     if (!validateForm()) return
 
     setIsSubmitting(true)
 
-    // TODO: Connect to Supabase sell_car_requests table
-    setTimeout(() => {
-      setIsSubmitting(false)
-      setSubmitSuccess(true)
-      setFormData({
-        name: '',
-        email: '',
-        phone: '',
-        vehicleMake: '',
-        vehicleModel: '',
-        vehicleYear: '',
-        mileage: '',
-        priceExpectation: '',
-        condition: '',
-        notes: '',
-      })
-    }, 1000)
+    const { error } = await supabase.from('sell_car_requests').insert({
+      name: formData.name,
+      email: formData.email,
+      phone: formData.phone,
+      vehicle_make: formData.vehicleMake,
+      vehicle_model: formData.vehicleModel,
+      vehicle_year: parseInt(formData.vehicleYear),
+      mileage: parseInt(formData.mileage),
+      price_expectation: parseFloat(formData.priceExpectation),
+      condition: formData.condition,
+      notes: formData.notes || null,
+      status: 'new',
+    })
+
+    setIsSubmitting(false)
+
+    if (error) {
+      console.error('Sell car submission error:', error)
+      setSubmitError('Something went wrong submitting your listing. Please try again or contact us via WhatsApp.')
+      return
+    }
+
+    setSubmitSuccess(true)
+    setFormData({
+      name: '',
+      email: '',
+      phone: '',
+      vehicleMake: '',
+      vehicleModel: '',
+      vehicleYear: '',
+      mileage: '',
+      priceExpectation: '',
+      condition: '',
+      notes: '',
+    })
   }
 
   return (
@@ -82,7 +103,6 @@ export default function SellYourCarPage() {
       <Header />
       <WhatsAppButton />
       <main id="main-content" className="bg-black min-h-screen pt-8">
-        {/* Hero section */}
         <section className="section-padding-small bg-gradient-to-b from-black via-primary-dark-gray to-black">
           <div className="container-max text-center">
             <h1 className="text-4xl sm:text-5xl font-heading font-bold text-white mb-4">
@@ -96,7 +116,6 @@ export default function SellYourCarPage() {
 
         <section className="section-padding-small bg-black">
           <div className="container-max">
-            {/* Process explainer */}
             <div className="max-w-3xl mx-auto mb-12">
               <h2 className="text-2xl font-bold text-white text-center mb-8">How It Works</h2>
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
@@ -130,7 +149,6 @@ export default function SellYourCarPage() {
               </div>
             </div>
 
-            {/* Features list */}
             <div className="max-w-2xl mx-auto mb-12">
               <Card variant="default" padding="lg">
                 <h3 className="text-lg font-bold text-white mb-4">Why Sell With Us</h3>
@@ -145,7 +163,6 @@ export default function SellYourCarPage() {
               </Card>
             </div>
 
-            {/* Listing form */}
             <div className="max-w-2xl mx-auto">
               <Card variant="elevated" padding="lg">
                 <h2 className="text-2xl font-bold text-white mb-2">List Your Car</h2>
@@ -163,7 +180,6 @@ export default function SellYourCarPage() {
                   </div>
                 ) : (
                   <form onSubmit={handleSubmit} className="space-y-5">
-                    {/* Contact info */}
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
                       <Input
                         label="Full Name"
@@ -196,7 +212,6 @@ export default function SellYourCarPage() {
 
                     <div className="h-px bg-primary-gold my-2" />
 
-                    {/* Vehicle info */}
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
                       <Input
                         label="Vehicle Make"
@@ -266,6 +281,10 @@ export default function SellYourCarPage() {
                       hint="Photos can be sent via WhatsApp after submitting this form"
                     />
 
+                    {submitError && (
+                      <p className="text-red-500 text-sm">{submitError}</p>
+                    )}
+
                     <Button
                       type="submit"
                       variant="primary"
@@ -278,13 +297,9 @@ export default function SellYourCarPage() {
 
                     <p className="text-center text-primary-silver text-sm">
                       Or{' '}
-                      <button
-                        type="button"
-                        onClick={() => window.open(WHATSAPP.url, '_blank')}
-                        className="text-primary-gold hover:underline"
-                      >
+                      <a href={WHATSAPP.url} target="_blank" rel="noopener noreferrer" className="text-primary-gold hover:underline">
                         chat with us on WhatsApp
-                      </button>
+                      </a>
                     </p>
                   </form>
                 )}
