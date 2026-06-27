@@ -3,6 +3,7 @@ import Header from '@/components/global/Header'
 import Footer from '@/components/global/Footer'
 import WhatsAppButton from '@/components/global/WhatsAppButton'
 import Card from '@/components/ui/Card'
+import CeoPhoto from '@/components/global/CeoPhoto'
 import { COMPANY } from '@/lib/constants'
 
 export const metadata: Metadata = {
@@ -138,12 +139,7 @@ export default function AboutPage() {
           <div className="container-max">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center max-w-4xl mx-auto">
               <div className="flex justify-center order-2 lg:order-1">
-                <div className="w-64 h-64 bg-gradient-to-br from-primary-gold to-primary-dark-gold rounded-lg flex items-center justify-center border-2 border-primary-gold">
-                  <div className="text-center">
-                    <p className="text-6xl mb-4">👤</p>
-                    <p className="text-black text-sm font-bold">CEO Photo</p>
-                  </div>
-                </div>
+               <CeoPhoto size={256} /> 
               </div>
 
               <div className="order-1 lg:order-2">
