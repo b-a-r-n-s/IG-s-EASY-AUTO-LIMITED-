@@ -1,12 +1,11 @@
-'use client'
-
-import React, { useState } from 'react'
+import React from 'react'
 import Link from 'next/link'
 import { COMPANY, NAVIGATION, WHATSAPP } from '@/lib/constants'
 import Button from '@/components/ui/Button'
+import SiteLogo from '@/components/global/SiteLogo'
 
 export default function Header() {
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = React.useState(false)
 
   const toggleMobileMenu = () => {
     setIsMobileMenuOpen(!isMobileMenuOpen)
@@ -22,26 +21,9 @@ export default function Header() {
         {/* Header content */}
         <div className="flex items-center justify-between py-4 sm:py-5">
           {/* Logo */}
-          <Link
-            href="/"
-            className="flex items-center gap-2 hover:opacity-80 transition-opacity"
-            onClick={closeMobileMenu}
-          >
-            {/* Logo text as placeholder - replace with actual logo later */}
-            <div className="flex items-center gap-2">
-              <div className="w-10 h-10 bg-primary-gold rounded-lg flex items-center justify-center">
-                <span className="text-black font-heading font-bold text-sm">IG</span>
-              </div>
-              <div className="hidden sm:block">
-                <p className="text-primary-gold font-heading font-bold text-sm leading-tight">
-                  IG EASY
-                </p>
-                <p className="text-primary-silver font-body text-xs leading-tight">
-                  AUTO LIMITED
-                </p>
-              </div>
-            </div>
-          </Link>
+          <div onClick={closeMobileMenu} className="cursor-pointer">
+            <SiteLogo />
+          </div>
 
           {/* Desktop Navigation */}
           <nav className="hidden lg:flex items-center gap-1">
@@ -61,7 +43,7 @@ export default function Header() {
             <Button
               variant="outline"
               size="sm"
-              onClick={() => window.location.href = WHATSAPP.url}
+              onClick={() => (window.location.href = WHATSAPP.url)}
             >
               WhatsApp
             </Button>
@@ -137,4 +119,4 @@ export default function Header() {
       </div>
     </header>
   )
-                            }
+}
