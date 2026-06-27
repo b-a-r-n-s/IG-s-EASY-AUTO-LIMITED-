@@ -4,6 +4,7 @@ import React from 'react'
 import Link from 'next/link'
 import { COMPANY, FOOTER_LINKS, BUSINESS_HOURS, WHATSAPP } from '@/lib/constants'
 import Button from '@/components/ui/Button'
+import SiteLogo from '@/components/global/SiteLogo'
 
 export default function Footer() {
   const currentDay = new Date().toLocaleDateString('en-US', { weekday: 'long' }).toLowerCase()
@@ -17,19 +18,7 @@ export default function Footer() {
           {/* Company Info */}
           <div className="flex flex-col gap-4">
             {/* Logo */}
-            <Link href="/" className="inline-flex items-center gap-2 hover:opacity-80 transition-opacity max-w-fit">
-              <div className="w-10 h-10 bg-primary-gold rounded-lg flex items-center justify-center">
-                <span className="text-black font-heading font-bold text-sm">IG</span>
-              </div>
-              <div>
-                <p className="text-primary-gold font-heading font-bold text-sm leading-tight">
-                  IG EASY AUTO
-                </p>
-                <p className="text-primary-silver font-body text-xs leading-tight">
-                  LIMITED
-                </p>
-              </div>
-            </Link>
+            <SiteLogo small />
 
             {/* Tagline */}
             <p className="text-primary-silver text-sm leading-relaxed">
@@ -185,4 +174,4 @@ export default function Footer() {
       />
     </footer>
   )
-          }
+              }
