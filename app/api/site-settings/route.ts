@@ -1,6 +1,9 @@
 import { NextResponse } from 'next/server'
 import { supabase } from '@/lib/supabase'
 
+export const dynamic = 'force-dynamic'
+export const revalidate = 0
+
 export async function GET() {
   try {
     const { data, error } = await supabase
@@ -17,9 +20,12 @@ export async function GET() {
       settings[row.key] = row.value
     })
 
-    return NextResponse.json({ success: true, settings })
+    return NextResponse.json(
+      { success: true, settings },
+      { headers: { 'Cache-Control': 'no-store, no-cache, must-revalidate' } }
+    )
   } catch (err) {
     console.error('Site settings GET error:', err)
     return NextResponse.json({ success: false, message: 'An error occurred' }, { status: 500 })
   }
-}
+  }
