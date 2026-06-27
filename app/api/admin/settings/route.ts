@@ -13,8 +13,11 @@ export async function PATCH(request: Request) {
       return NextResponse.json({ success: false, message: 'Invalid settings data' }, { status: 400 })
     }
 
+    // Capture a non-null admin client so TypeScript cannot complain inside callbacks
+    const admin = supabaseAdmin!
+
     const updates = Object.entries(settings).map(([key, value]) =>
-      supabaseAdmin
+      admin
         .from('site_settings')
         .upsert({ key, value: String(value), updated_at: new Date().toISOString() }, { onConflict: 'key' })
     )
@@ -26,4 +29,4 @@ export async function PATCH(request: Request) {
     console.error('Settings API error:', err)
     return NextResponse.json({ success: false, message: 'An error occurred' }, { status: 500 })
   }
-                                                                                      }
+}
