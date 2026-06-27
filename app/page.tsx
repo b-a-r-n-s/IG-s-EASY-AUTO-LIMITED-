@@ -276,12 +276,7 @@ export default async function HomePage() {
           <div className="container-max">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
               <div className="flex justify-center">
-                <div className="w-64 h-64 bg-gradient-to-br from-primary-gold to-primary-dark-gold rounded-lg flex items-center justify-center border-2 border-primary-gold">
-                  <div className="text-center">
-                    <p className="text-6xl mb-4">👤</p>
-                    <p className="text-black text-sm font-bold">CEO Photo</p>
-                  </div>
-                </div>
+               <CeoPhoto size={256} />
               </div>
 
               <div>
