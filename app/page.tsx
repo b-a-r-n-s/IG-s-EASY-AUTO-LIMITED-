@@ -8,6 +8,7 @@ import Button from '@/components/ui/Button'
 import Card from '@/components/ui/Card'
 import Carousel from '@/components/ui/Carousel'
 import VehicleCard from '@/components/inventory/VehicleCard'
+import CeoPhoto from '@/components/global/CeoPhoto'
 import Link from 'next/link'
 
 export const metadata: Metadata = {
