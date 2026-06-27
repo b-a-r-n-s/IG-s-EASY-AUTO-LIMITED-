@@ -8,11 +8,13 @@ import Button from '@/components/ui/Button'
 import Input, { Textarea } from '@/components/ui/Input'
 import Card from '@/components/ui/Card'
 import { COMPANY, WHATSAPP, BUSINESS_HOURS } from '@/lib/constants'
+import { supabase } from '@/lib/supabase'
 
 export default function ContactPage() {
   const [formData, setFormData] = useState({ name: '', email: '', phone: '', message: '' })
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [submitSuccess, setSubmitSuccess] = useState(false)
+  const [submitError, setSubmitError] = useState('')
   const [errors, setErrors] = useState<Record<string, string>>({})
 
   const handleChange = (field: string, value: string) => {
@@ -35,17 +37,31 @@ export default function ContactPage() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
+    setSubmitError('')
 
     if (!validateForm()) return
 
     setIsSubmitting(true)
 
-    // TODO: Connect to Supabase contact_inquiries table
-    setTimeout(() => {
-      setIsSubmitting(false)
-      setSubmitSuccess(true)
-      setFormData({ name: '', email: '', phone: '', message: '' })
-    }, 1000)
+    const { error } = await supabase.from('contact_inquiries').insert({
+      name: formData.name,
+      email: formData.email,
+      phone: formData.phone,
+      message: formData.message,
+      vehicle_id: null,
+      status: 'new',
+    })
+
+    setIsSubmitting(false)
+
+    if (error) {
+      console.error('Contact submission error:', error)
+      setSubmitError('Something went wrong sending your message. Please try again or contact us via WhatsApp.')
+      return
+    }
+
+    setSubmitSuccess(true)
+    setFormData({ name: '', email: '', phone: '', message: '' })
   }
 
   const dayLabels: Record<string, string> = {
@@ -63,7 +79,6 @@ export default function ContactPage() {
       <Header />
       <WhatsAppButton />
       <main id="main-content" className="bg-black min-h-screen pt-8">
-        {/* Hero */}
         <section className="section-padding-small bg-gradient-to-b from-black via-primary-dark-gray to-black">
           <div className="container-max text-center">
             <h1 className="text-4xl sm:text-5xl font-heading font-bold text-white mb-4">
@@ -118,16 +133,12 @@ export default function ContactPage() {
                   </Card>
                 </div>
 
-                <Button
-                  variant="primary"
-                  size="lg"
-                  fullWidth
-                  onClick={() => window.open(WHATSAPP.url, '_blank')}
-                >
-                  Chat on WhatsApp
-                </Button>
+                <a href={WHATSAPP.url} target="_blank" rel="noopener noreferrer">
+                  <Button variant="primary" size="lg" fullWidth>
+                    Chat on WhatsApp
+                  </Button>
+                </a>
 
-                {/* Google Maps embed */}
                 <div className="mt-8 rounded-lg overflow-hidden border-2 border-primary-gold h-64">
                   <iframe
                     title="IG Easy Auto Limited Location"
@@ -191,6 +202,11 @@ export default function ContactPage() {
                         onChange={(e) => handleChange('message', e.target.value)}
                         error={errors.message}
                       />
+
+                      {submitError && (
+                        <p className="text-red-500 text-sm">{submitError}</p>
+                      )}
+
                       <Button type="submit" variant="primary" size="lg" fullWidth isLoading={isSubmitting}>
                         Send Message
                       </Button>
@@ -205,4 +221,4 @@ export default function ContactPage() {
       <Footer />
     </>
   )
-    }
+        }
