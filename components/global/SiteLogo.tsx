@@ -7,9 +7,11 @@ import { COMPANY } from '@/lib/constants'
 type Props = {
   small?: boolean
   alt?: string
+  onClick?: () => void
+  noLink?: boolean
 }
 
-export default function SiteLogo({ small = false, alt }: Props) {
+export default function SiteLogo({ small = false, alt, onClick, noLink = false }: Props) {
   const [logoUrl, setLogoUrl] = useState<string | null>(null)
   const [loaded, setLoaded] = useState(false)
 
@@ -34,51 +36,39 @@ export default function SiteLogo({ small = false, alt }: Props) {
     }
   }, [])
 
-  // small square used in footer/header tight areas
-  if (small) {
-    return (
-      <Link href="/" className="inline-flex items-center gap-2 hover:opacity-80 transition-opacity">
-        {logoUrl ? (
-          // eslint-disable-next-line @next/next/no-img-element
-          <img
-            src={logoUrl}
-            alt={alt || COMPANY.name}
-            className="w-10 h-10 rounded-lg object-cover"
-            onLoad={() => setLoaded(true)}
-          />
-        ) : (
-          <div className="w-10 h-10 bg-primary-gold rounded-lg flex items-center justify-center">
-            <span className="text-black font-heading font-bold text-sm">IG</span>
-          </div>
-        )}
-      </Link>
-    )
-  }
-
-  // default (header) — logo + text
-  return (
-    <Link href="/" className="inline-flex items-center gap-3 hover:opacity-80 transition-opacity">
+  const content = (
+    <>
       {logoUrl ? (
         // eslint-disable-next-line @next/next/no-img-element
         <img
           src={logoUrl}
           alt={alt || COMPANY.name}
-          className="w-12 h-12 rounded-lg object-contain"
+          className={small ? 'w-10 h-10 rounded-lg object-cover' : 'w-12 h-12 rounded-lg object-contain'}
           onLoad={() => setLoaded(true)}
         />
       ) : (
-        <div className="w-12 h-12 bg-primary-gold rounded-lg flex items-center justify-center">
-          <span className="text-black font-heading font-bold text-lg">IG</span>
+        <div className={small ? 'w-10 h-10 bg-primary-gold rounded-lg flex items-center justify-center' : 'w-12 h-12 bg-primary-gold rounded-lg flex items-center justify-center'}>
+          <span className={small ? 'text-black font-heading font-bold text-sm' : 'text-black font-heading font-bold text-lg'}>IG</span>
         </div>
       )}
-      <div className="hidden sm:block">
-        <p className="text-primary-gold font-heading font-bold text-sm leading-tight">
-          IG EASY
-        </p>
-        <p className="text-primary-silver font-body text-xs leading-tight">
-          AUTO LIMITED
-        </p>
+      <div className={small ? 'hidden sm:block' : 'hidden sm:block'}>
+        {!small && (
+          <>
+            <p className="text-primary-gold font-heading font-bold text-sm leading-tight">IG EASY</p>
+            <p className="text-primary-silver font-body text-xs leading-tight">AUTO LIMITED</p>
+          </>
+        )}
       </div>
+    </>
+  )
+
+  if (noLink) {
+    return <div className="inline-flex items-center gap-3 hover:opacity-80 transition-opacity" onClick={onClick}>{content}</div>
+  }
+
+  return (
+    <Link href="/" onClick={onClick} className={small ? 'inline-flex items-center gap-2 hover:opacity-80 transition-opacity' : 'inline-flex items-center gap-3 hover:opacity-80 transition-opacity'}>
+      {content}
     </Link>
   )
 }
