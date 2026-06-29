@@ -1,30 +1,26 @@
-import { put } from '@vercel/blob'
+import { handleUpload, type HandleUploadBody } from '@vercel/blob/client'
 import { NextResponse } from 'next/server'
 
 export async function POST(request: Request): Promise<NextResponse> {
+  const body = (await request.json()) as HandleUploadBody
+
   try {
-    const form = await request.formData()
-    const file = form.get('file') as File | null
-
-    if (!file) {
-      return NextResponse.json({ success: false, message: 'No file provided' }, { status: 400 })
-    }
-
-    if (file.size > 4.5 * 1024 * 1024) {
-      return NextResponse.json(
-        { success: false, message: 'File too large. Please compress to under 4.5MB.' },
-        { status: 400 }
-      )
-    }
-
-    const blob = await put(file.name, file, {
-      access: 'public',
-      addRandomSuffix: true,
+    const jsonResponse = await handleUpload({
+      body,
+      request,
+      onBeforeGenerateToken: async () => {
+        return {
+          allowedContentTypes: ['video/mp4', 'image/jpeg', 'image/png', 'image/webp'],
+          addRandomSuffix: true,
+        }
+      },
+      onUploadCompleted: async () => {
+        // No action needed here — admin page saves the URL separately
+      },
     })
 
-    return NextResponse.json({ success: true, url: blob.url })
-  } catch (err) {
-    console.error('Upload error:', err)
-    return NextResponse.json({ success: false, message: 'Upload failed' }, { status: 500 })
+    return NextResponse.json(jsonResponse)
+  } catch (error) {
+    return NextResponse.json({ error: (error as Error).message }, { status: 400 })
   }
-  }
+                             }
