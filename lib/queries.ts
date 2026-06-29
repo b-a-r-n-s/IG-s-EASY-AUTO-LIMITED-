@@ -158,3 +158,15 @@ export async function getFeaturedTestimonials(limit = 5) {
 
   return data
   }
+
+export async function getHeroMedia(): Promise<{ videoUrl?: string; posterUrl?: string }> {
+  const { data } = await supabase
+    .from('site_settings')
+    .select('key, value')
+    .in('key', ['hero_video_url', 'hero_poster_url'])
+
+  const videoUrl = data?.find((s) => s.key === 'hero_video_url')?.value || undefined
+  const posterUrl = data?.find((s) => s.key === 'hero_poster_url')?.value || undefined
+
+  return { videoUrl, posterUrl }
+}
