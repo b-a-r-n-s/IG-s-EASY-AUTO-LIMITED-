@@ -16,7 +16,7 @@ export default function AdminMediaPage() {
   const [isUploadingPoster, setIsUploadingPoster] = useState(false)
   const [message, setMessage] = useState('')
 
-  const uploadFile = async (file: File): Promise<string | null> => {
+  /*const uploadFile = async (file: File): Promise<string | null> => {
     const formData = new FormData()
     formData.append('file', file)
 
@@ -31,6 +31,20 @@ export default function AdminMediaPage() {
       return null
     }
     return result.url
+  }*/
+
+  const uploadFile = async (file: File): Promise<string | null> => {
+    try {
+      const blob = await upload(file.name, file, {
+        access: 'public',
+        handleUploadUrl: '/api/admin/upload-media',
+      })
+      return blob.url
+    } catch (err: any) {
+      console.error('Upload error:', err)
+      setMessage(err?.message || 'Upload failed — check your connection and try again')
+      return null
+    }
   }
 
   const handleVideoUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
